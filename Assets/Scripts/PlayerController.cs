@@ -5,22 +5,53 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private float jumpForce, gravityModifier;
+    [SerializeField] private ParticleSystem explosionParticle, dirtParticle;
+    [SerializeField] private AudioClip jumpSound, crashSound;
+    private Animator playerAnimation;
+    private AudioSource playerAudio;
+    private Rigidbody playerRB;
+    private bool isOnGround;
+    public bool gameOver {get; private set;} 
+
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-       void OnJump()
-       {
-            OnJump(input: InputValue);
-       }
-        void OnCollisionEnter;
-            {
-            (collision: Collision);
-            }
+       playerRB = GetComponent<Rigidbody>();
+
+        isOnGround = true;
+
+        Physics.gravity *= gravityModifier;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+    }
+
+    private void OnJump(InputValue input)
+    {
+        if (isOnGround)
+        {
+            playerRB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+
+            isOnGround = false;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name == "Ground")
+        {
+            isOnGround = true;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
         
     }
+
+
 }
