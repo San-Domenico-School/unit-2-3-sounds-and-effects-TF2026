@@ -9,6 +9,7 @@ public class SpawnManager : MonoBehaviour
     private Vector3 spawnPos = new Vector3(25, 0, 0);
     private float startDelay = 2f;
     private float repeatRate = 2f;
+    private bool gameOver = false;
 
     // Start is called before the first frame update
     private void Start()
@@ -25,5 +26,13 @@ public class SpawnManager : MonoBehaviour
     private void SpawnObstacle()
     {
         Instantiate(obstaclePrefab, spawnPos, obstaclePrefab.transform.rotation);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name == "Prop_Barrier01")
+        {
+            gameOver = true;
+        }
     }
 }
