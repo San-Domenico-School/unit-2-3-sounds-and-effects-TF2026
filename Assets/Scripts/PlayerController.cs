@@ -46,6 +46,11 @@ public class PlayerController : MonoBehaviour
         {
             isOnGround = true;
         }
+
+        if(collision.gameObject.CompareTag("Obstacles"))
+        {
+            gameOver = true;
+        }
     }
 
     private void OnTriggerEnter(Collider other)

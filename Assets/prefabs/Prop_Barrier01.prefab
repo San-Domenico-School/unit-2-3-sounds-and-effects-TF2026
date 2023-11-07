@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 65283760531544414}
   m_Layer: 0
   m_Name: Prop_Barrier01
-  m_TagString: Untagged
+  m_TagString: Obstacles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -164,8 +164,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1.7426802, z: 1}
-  m_Center: {x: 0, y: 0.88327056, z: 0}
+  m_Size: {x: 1, y: 1.7710514, z: 1.0071913}
+  m_Center: {x: 0, y: 0.89745617, z: 0.007774055}
 --- !u!114 &65283760531544414
 MonoBehaviour:
   m_ObjectHideFlags: 0
