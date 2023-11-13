@@ -17,7 +17,9 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-       playerRB = GetComponent<Rigidbody>();
+        playerAudio = GetComponent<AudioSource>();
+
+        playerRB = GetComponent<Rigidbody>();
 
         isOnGround = true;
 
@@ -41,6 +43,10 @@ public class PlayerController : MonoBehaviour
             isOnGround = false;
 
             playerAnimation.SetTrigger("Jump_trig");
+
+            dirtParticle.Stop();
+
+            playerAudio.PlayOneShot(jumpSound, 1.0f);
         }
     }
 
@@ -49,6 +55,8 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.name == "Ground")
         {
             isOnGround = true;
+
+            dirtParticle.Play();
         }
 
         if(collision.gameObject.CompareTag("Obstacles"))
@@ -56,6 +64,14 @@ public class PlayerController : MonoBehaviour
             gameOver = true;
 
             playerAnimation.SetBool("Death_b", true);
+
+            playerAudio.PlayOneShot(crashSound, 5.0f);
+
+            transform.Translate(new Vector3(transform.position.x - 1, transform.position.y, transform.position.z));
+
+            explosionParticle.Play();
+
+            dirtParticle.Stop();
         }
     }
 
