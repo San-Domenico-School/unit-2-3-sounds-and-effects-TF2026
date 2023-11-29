@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     private AudioSource playerAudio;
     private Rigidbody playerRB;
     private bool isOnGround;
-    public bool gameOver {get; private set;} 
+    public bool gameOver { get; private set; }
 
     // Start is called before the first frame update
     private void Start()
@@ -52,14 +52,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "Ground")
+        if (collision.gameObject.name == "Ground" && !GameManager.gameOver)
         {
             isOnGround = true;
 
             dirtParticle.Play();
         }
 
-        if(collision.gameObject.CompareTag("Obstacles"))
+        if (collision.gameObject.CompareTag("Obstacles"))
         {
             GameManager.gameOver = true;
 
@@ -77,6 +77,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.gameObject.CompareTag("Scoreable"))
+        {
+            GameManager.ChangeScore(1);
+        }
     }
 }
