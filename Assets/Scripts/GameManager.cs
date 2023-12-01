@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
         {
             if (timeRemaining > 0)
             {
-                timeRemainingText.text = timeRemaining.ToString(); 
+                timeRemainingText.text = timeRemaining.ToString();
             }
             else
             {
@@ -75,11 +75,15 @@ public class GameManager : MonoBehaviour
 
         dirtSplatter.Play();
 
-        if (timedGame)
+        if (timedGame == true)
         {
             timeRemainingText.gameObject.SetActive(true);
 
             InvokeRepeating("TimeCountdown", 1f, 1f);
+        }
+        if (timedGame == false)
+        {
+            timeRemainingText.gameObject.SetActive(false);
         }
     }
 
@@ -97,6 +101,9 @@ public class GameManager : MonoBehaviour
             AudioSource.Stop();
 
             CancelInvoke();
+
+            timeRemainingText.gameObject.SetActive(true);
+            timeRemainingText.text = "Game\nOver";
         }
     }
 
